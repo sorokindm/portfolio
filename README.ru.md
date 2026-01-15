@@ -7,6 +7,15 @@
 Простой электронный магазин для спортивных товаров.
 Поддерживает просмотр каталога, регистрацию и аутентификацию пользователей, управление корзиной и заказами.
 
+Для запуска (требуется установленный python):
+- docker compose up -d
+- cd DjangoBack
+- python -m venv .venv
+- .venv/scripts/activate
+- pip install -r requirements.txt
+- python manage.py migrate
+- python manage.py runserver
+
 Технологический стак:
 - Docker
 - Postgres

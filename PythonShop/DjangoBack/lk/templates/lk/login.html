@@ -1,0 +1,20 @@
+{% extends "ecat/base.html" %}
+{% load filters %}
+
+{% block merch %}
+<h2 class="center">Вход</h2>
+<form method="POST" action="lklogin" class="center-form">
+
+
+    {% csrf_token %}
+    {{form}}
+    <button class="btn btn-primary mt-2">Отправить</button>
+</form>
+
+{% endblock %}
+
+{% block register %}
+<div class="ms-4">
+    <a class="hover-effect text-white text-decoration-none" href="/lk/register">Регистрация</a>
+</div>
+{% endblock %}

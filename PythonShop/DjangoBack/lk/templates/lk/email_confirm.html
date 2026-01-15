@@ -1,0 +1,14 @@
+{% extends "ecat/base.html" %}
+{% load filters %}
+
+{% block merch %}
+<h2 class="center">Подтверждение регистрации</h2>
+<form method="POST" action="lkemailconfirm" class="center-form">
+
+
+    {% csrf_token %}
+    {{form}}
+    <button class="btn btn-primary mt-2">Отправить</button>
+</form>
+
+{% endblock %}

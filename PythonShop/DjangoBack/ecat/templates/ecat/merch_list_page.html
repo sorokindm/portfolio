@@ -1,0 +1,19 @@
+ {% load el_pagination_tags %}
+
+ {% if not merch_list%}<h1 class="text-center">Товаров не найдено</h1>{%endif%}
+
+    
+    
+      {% paginate 10,6 merch_list %}
+       {%for merch in merch_list%}
+       <div class="merch mb-4 mx-4">
+        <div class="card-head">
+           <div><b>{{merch.title}}</b></div>
+           <div>{{merch.price}}</div>
+         </div>
+        <a href="merch/{{merch.id}}" class="card-img">
+          <img src="http://{{host}}:8080{{merch.merchphoto_set.all.0.imgurl}}">
+        </a>
+      </div>
+      {%endfor%}
+      {% show_more "Показать больше" %}

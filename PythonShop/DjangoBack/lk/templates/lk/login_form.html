@@ -1,0 +1,11 @@
+{{ form.non_field_errors }}
+<div class="form-group">
+  {{ form.email.as_field_group }}
+</div>
+<div class="form-group">
+  {{ form.password.as_field_group }}
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="unhide" onchange="unhidePassword()">
+    <label class="form-check-label" for="unhide">Показать</label>
+  </div>
+</div>

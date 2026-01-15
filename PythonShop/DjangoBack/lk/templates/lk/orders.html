@@ -1,0 +1,27 @@
+{% extends "ecat/base.html" %}
+
+{% block merch %}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Дата</th>
+            <th scope="col">Товары</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for order in orders%}
+        <tr>
+
+            <th scope="row">{{forloop.counter}}</th>
+            <td>        {{order.datetime}}  </td>
+            <td class="d-flex flex-column">            
+                {% for item in order.items %}
+                    <div>{{item.merch.title}}</div>
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

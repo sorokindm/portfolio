@@ -1,0 +1,73 @@
+{% extends "ecat/base.html" %}
+
+{% block merch %}
+     {% if not cart%}
+        <h2 class="ms-4">В вашей корзине пока ничего нет</h2>
+     {%endif%}
+
+
+    <!-- <div>
+        {% for value in cart %}
+            {{value}}
+        {%endfor%}
+    </div> -->
+    {% csrf_token %}
+
+    <div class="container-lg cart-wrapper p-0 mt-1">
+            {%for item in cart%}
+            <div id={{item.product.id}}>
+                <div class="row vert-center-flex h3 cart-title-col w-100 ps-2">
+                        <div class="col">{{item.product.title}}</div>
+                </div>
+                <div class="row mx-0 my-1 w-100">
+
+                    <div class="col-3">
+                        <img class="rounded img-fluid" src="http://{{host}}:8080{{item.product.merchphoto_set.all.0.imgurl}}"></img>
+                    </div>
+                    <div class="vert-center-flex h3 col-3">
+                        {{item.price}}
+                    </div>
+
+                    <div class="col d-flex vert-center-flex mt-1">
+                            <div class="">                    
+                                <button class="btn btn-primary text-center" type="button" onclick="addToCart('{{item.product.id}}', false, true)"><svg class="btn-del" width="16" height="16"><use href="#plus"></use></svg></button>
+                            </div>
+                            <div class="quantity h3 my-0 text-center mx-2">
+                                {{item.quantity}}
+                            </div>
+                            
+                            {% if item.quantity == 1 %}
+                            <div class="">
+                                <button disabled class="btn btn-primary" type="button" onclick="addToCart('{{item.product.id}}', true, true)"><svg class="btn-del" width="16" height="16"><use href="#minus"></use></svg></button>  
+                            </div>
+                            {% else %}  
+                            <div class="">
+                                <button class="btn btn-primary" type="button" onclick="addToCart('{{item.product.id}}', true, true)"><svg class="btn-del" width="16" height="16"><use href="#minus"></use></svg></button>  
+                            </div>
+                            {% endif %}
+
+                            <div class="ms-3">
+                                <button class="btn btn-danger" type="button" onclick="removeFromCart('{{item.product.id}}')"><svg class="btn-del" width="16" height="16"><use href="#trash"></use></svg></button>
+                            </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            {%endfor%}
+
+    </div>
+    {% with total=cart.get_total_price %}
+        <div id="sum" class="sum h3 pe-3">
+            Итого: {{total}}
+        </div>
+    {% endwith %}
+
+
+    <div class="checkout pb-2">
+        <a class="btn btn-primary" type="button" href="addorder">
+            Заказать
+        </a>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+name: easyeshop
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./DjangoBack/Docker/db:/docker-entrypoint-initdb.d
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=0451
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+  fileserver:
+    image: nginx:alpine
+    ports:
+      - 8080:80
+    volumes:
+      - ./nginx-fileserver/images:/usr/share/nginx/images
+      - ./nginx-fileserver/config/fileserver.conf:/etc/nginx/nginx.conf
+  mailserver:
+    image: haravich/fake-smtp-server
+    ports:
+      - 1025:1025
+      - 1080:1080
+
+volumes:
+  db-data:
+    name: "eshop-data"
+      

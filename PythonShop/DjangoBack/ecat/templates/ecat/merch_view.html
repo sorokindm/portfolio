@@ -1,0 +1,31 @@
+    {% extends "ecat/base.html" %}
+    {% load filters %}
+
+    {% block merch %}
+
+        {% csrf_token %}
+        <div class="container d-flex flex-row merch-view flex-wrap justify-content-center mt-2">
+ 
+            <img class="img-fluid rounded" width="320px" height="320px" src="http://{{host}}:8080{{merch.merchphoto_set.all.0.imgurl}}"/>
+
+            <span class="mt-5 mx-5 center merch-desc">
+                <h1>{{merch.title}}</h1>
+                    <div class="d-flex flex-row vert-center-flex">
+                        <div class="full-width center"><span class="center">Цена: <strong>{{merch.price}}</strong></span></div>
+                        {{merch.id|json_script:"merch_id"}}
+                        {% if cart.cart|indict:merch.id %}
+                             <a class="btn btn-success center ms-5 add-button incart vert-center-flex" href="/cart" >В корзине</a>
+                             <button hidden class="btn btn-primary center ms-5 add-button" onclick="merchViewAddToCart(JSON.parse(document.getElementById('merch_id').textContent))">Добавить в корзину</button>
+                        {% else %}
+                            <a hidden class="btn btn-success center ms-5 add-button incart vert-center-flex" href="/cart" >В корзине</a>
+                            <button class="btn btn-primary center ms-5 add-button" onclick="merchViewAddToCart(JSON.parse(document.getElementById('merch_id').textContent))">Добавить в корзину</button>
+                        {% endif %}
+
+                    </div>
+                <h4 class="mt-2">Описание:</h2>
+                 <p>{{merch.description}}</p>
+            </span>
+        </div>
+
+        
+    {% endblock %}

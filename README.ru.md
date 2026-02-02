@@ -24,3 +24,24 @@
 - Django Templates
 - JS
 - CSS (bootstrap)
+
+## Projects
+### LawWebsite
+Вебсайт юридической компании на Java+Spring+React.
+Включает в себя новостую и статейную ленту, форму обратной связи, фронт на реакте, адаптивную вёрстку.
+
+Для запуска (требуется java 17 and docker):
+- ./gradlew bootRun
+
+Tech stack:
+- Gradle
+- Docker
+- Postgres
+- Java
+- Spring boot
+- Hibernate
+- JS
+- Typescript
+- CSS (bootstrap)
+- React
+- Vite

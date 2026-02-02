@@ -1,0 +1,42 @@
+plugins {
+    id("com.github.node-gradle.node") version "7.0.2"
+}
+
+node {
+    version = "20.11.0"
+    download = true
+}
+
+npm_run_build {
+    inputs.files fileTree("public")
+    inputs.files fileTree("src")
+    inputs.files fileTree("dist")
+
+    inputs.file '.env'
+    inputs.file 'index.html'
+    inputs.file 'package.json'
+    inputs.file 'package-lock.json'
+    inputs.file 'tsconfig.json'
+    inputs.file 'tsconfig.node.json'
+    inputs.file 'vite.config.ts'
+
+    outputs.dir 'dist'
+}
+
+//clean{
+//    delete "${project.projectDir}/dist"
+//}
+
+task clean(type: Delete) {
+    delete "${layout.getBuildDirectory().get()}"
+    delete "${project.projectDir}/dist"
+}
+
+task packageNpmApp(type: Zip) {
+    dependsOn npm_run_build
+    archiveBaseName = "arfema-frontend"
+    archiveExtension = "jar"
+    destinationDirectory = file("${layout.buildDirectory.get()}/build_packageNpmApp")
+    from("dist")
+    into("/static")
+}
